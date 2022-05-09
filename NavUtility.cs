@@ -74,9 +74,9 @@ public static class WeightedRandomizer
 
 	/// <summary>
 	/// get random bool with percent chance of true as parameter
-	/// parameter must be between 0-100 otherwise function will always return false
+	/// parameter must be between 0-100 otherwise function will make 50% chance
 	/// </summary>
-	public static bool GetWeightedBool(int _chance)
+	public static bool GetWeightedBool(int _chance = 50)
 	{
 		if (_chance >= 0 && _chance <= 100)
 		{
@@ -87,7 +87,10 @@ public static class WeightedRandomizer
 		}
 		else
 		{
-			return false;
+			var weights = new Dictionary<bool, int>();
+			weights.Add(true, 50);
+			weights.Add(false, 50);
+			return WeightedRandomizer.From(weights).TakeOne();
 		}
 
 	}
