@@ -5,42 +5,42 @@ using UnityEngine;
 
 namespace NavUtility
 {
-    public static class Utility
-    {
-        public static void TestUtility()
-        {
-            Debug.Log("UTILITY WORKING");
-        }
+	public static class Utility
+	{
+		public static void TestUtility()
+		{
+			Debug.Log("UTILITY WORKING");
+		}
 
-        public static List<T> GetRandomElements<T>(this IEnumerable<T> list, int elementsCount)
-        {
-            return list.OrderBy(arg => System.Guid.NewGuid()).Take(elementsCount).ToList();
-        }
+		public static List<T> GetRandomElements<T>(this IEnumerable<T> list, int elementsCount)
+		{
+			return list.OrderBy(arg => System.Guid.NewGuid()).Take(elementsCount).ToList();
+		}
 
-        public static Sprite ConvertToSprite(this Texture2D texture)
-        {
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-        }
+		public static Sprite ConvertToSprite(this Texture2D texture)
+		{
+			return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+		}
 
 
-        public static Vector3 EditX(this Vector3 _value, float newXValue)
-        {
-            return new Vector3(newXValue, _value.y, _value.z);
-        }
-        public static Vector3 EditY(this Vector3 _value, float newYValue)
-        {
-            return new Vector3(_value.x, newYValue, _value.z);
-        }
-        public static Vector3 EditZ(this Vector3 _value, float newZValue)
-        {
-            return new Vector3(_value.x, _value.y, newZValue);
-        }
-    }
+		public static Vector3 EditX(this Vector3 _value, float newXValue)
+		{
+			return new Vector3(newXValue, _value.y, _value.z);
+		}
+		public static Vector3 EditY(this Vector3 _value, float newYValue)
+		{
+			return new Vector3(_value.x, newYValue, _value.z);
+		}
+		public static Vector3 EditZ(this Vector3 _value, float newZValue)
+		{
+			return new Vector3(_value.x, _value.y, newZValue);
+		}
+	}
 
-    public class UtilityMonoBehavior : MonoBehaviour
-    {
-        
-    }
+	public class UtilityMonoBehavior : MonoBehaviour
+	{
+
+	}
 }
 
 
@@ -145,4 +145,11 @@ public class WeightedRandomizer<T>
 
 		return list;
 	}
+}
+
+//ADD COLOR TO STRING
+public static class StringExtensions
+{
+	public static string AddColor(this string text, Color col) => $"<color={ColorHexFromUnityColor(col)}>{text}</color>";
+	public static string ColorHexFromUnityColor(this Color unityColor) => $"#{ColorUtility.ToHtmlStringRGBA(unityColor)}";
 }
