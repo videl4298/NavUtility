@@ -71,6 +71,26 @@ public static class WeightedRandomizer
 	{
 		return new WeightedRandomizer<R>(spawnRate);
 	}
+
+	/// <summary>
+	/// get random bool with percent chance of true as parameter
+	/// parameter must be between 0-100 otherwise function will always return false
+	/// </summary>
+	public static bool GetWeightedBool(int _chance)
+	{
+		if (_chance >= 0 && _chance <= 100)
+		{
+			var weights = new Dictionary<bool, int>();
+			weights.Add(true, _chance);
+			weights.Add(false, (100 - _chance));
+			return WeightedRandomizer.From(weights).TakeOne();
+		}
+		else
+		{
+			return false;
+		}
+
+	}
 }
 
 public class WeightedRandomizer<T>
@@ -146,6 +166,9 @@ public class WeightedRandomizer<T>
 		return list;
 	}
 }
+
+
+
 
 //ADD COLOR TO STRING
 public static class StringExtensions
